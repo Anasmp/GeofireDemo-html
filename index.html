@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GeoFire html5</title>
+
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+
+
+<script src="https://cdn.firebase.com/libs/geofire/4.1.2/geofire.min.js"></script>
+
+<script>
+ //Connection to your firebase database
+ firebase.initializeApp({
+ apiKey: "<apikey>",
+ databaseURL: "<databaseURL>"
+ });
+ 
+ 
+ var usersRef = firebase.database().ref("users").push();
+ 
+
+ var geoFire = new GeoFire(usersRef.child("geofire"));
+
+</script>
+
+<script>
+
+ usersRef.child(“_geofire”).onDisconnect().remove();
+
+</script>
+
+<script>
+ geoFire.set("you", [10.977680,76.228510]).then(function() {
+ console.log("Location added into firebase")
+ }).catch(function(error) {
+ console.log(error);
+ });
+ </script>
+
+</head>
+<body>
+
+</body>
+</html>
